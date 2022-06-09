@@ -20,18 +20,18 @@ app = Flask(__name__)
 @app.route("/skingorithm/predict", methods=["POST"])
 def predict2():
     data = {"success": False, "output": []}
-    try:
-        params = request.get_json()
-        if params is None:
-            return jsonify(data)
-        if(params != None):
-            finalinput = preproccess_input(params['input'])
-            output_model = modelrun(finalinput)
+#     try:
+    params = request.get_json()
+    if params is None:
+        return jsonify(data)
+    if(params != None):
+        finalinput = preproccess_input(params['input'])
+        output_model = modelrun(finalinput)
 
-            data["success"] = True
-            data["output"] = output_model
-    except:
-        print("Get exception")
+        data["success"] = True
+        data["output"] = output_model
+#     except:
+#         print("Get exception")
     return jsonify(data)
 
 #function resize dan crop
@@ -118,12 +118,12 @@ def load_models(fs_dict, ac_dict, bs_dict, wr_dict, ea_dict, pe_dict):
 if __name__ == "__main__":
     # Load Model
 
-    fspath = f'{os.getcwd()}/modelML/skin_ResUnet.h5'
-    acpath = f'{os.getcwd()}/modelML/acne_ResUnet.h5'
-    bspath = f'{os.getcwd()}/modelML/flek_ResUnet.h5'
-    wrpath = f'{os.getcwd()}/modelML/wrinkles_ResUnet.h5'
-    eapath = f'{os.getcwd()}/modelML/eye_ResUnet.h5'
-    pepath = f'{os.getcwd()}/modelML/panda_ResUnet.h5'
+    fspath = './modelML/skin_ResUnet.h5'
+    acpath = './modelML/acne_ResUnet.h5'
+    bspath = './modelML/flek_ResUnet.h5'
+    wrpath = './modelML/wrinkles_ResUnet.h5'
+    eapath = './modelML/eye_ResUnet.h5'
+    pepath = './modelML/panda_ResUnet.h5'
     FS_model, AC_model, BS_model, WR_model, EA_model, PE_model = load_models(fspath, acpath, bspath, wrpath, eapath, pepath)
 
     app.run(host='0.0.0.0', port=int(os.environ.get("PORT", 8080)))
