@@ -1,8 +1,6 @@
-# API for Authentication
+# API Face Recognition Skingorithm
 
-## Register a new user
-
--   Endpoint : `/register`
+-   Endpoint : `/skingorithm/predict`
 -   HTTP Method : `POST`
 -   Request Headers :
     -   Accept : `application/json`
@@ -10,13 +8,7 @@
 
 ```json
 {
-    "username": "jerryandriantop@gmail.com",
-    "password": "secret123",
-    "fullName": "Jerry Andrianto Pangaribuan",
-    "gender": "Male",
-    "date_of_birth": "2000-04-22",
-    "height": 173,
-    "weight": 60
+    "input": <base64 string face photo>
 }
 ```
 
@@ -26,17 +18,16 @@
 
 ```json
 {
-    "status": "success",
-    "message": "New user created",
-    "data": {
-        "id": "user-Ps9qXx12",
-        "username": "jerryandriantop@gmail.com",
-        "fullName": "Jerry Andrianto Pangaribuan",
-        "gender": "Male",
-        "date_of_birth": "2000-04-22",
-        "height": 173,
-        "weight": 60
-    }
+    {
+    "output": {
+        "acne": 99.92,
+        "average": 93.97,
+        "bspot": 100.0,
+        "peye": 81.84,
+        "wrinkle": 94.11
+    },
+    "success": true
+}
 }
 ```
 
@@ -44,81 +35,9 @@
 
 ```json
 {
-    "status": "error",
-    "message": "Server fail"
+    {
+    "output": [],
+    "success": false
 }
-```
-
-## Login a user
-
--   Endpoint : `/auth/login`
--   HTTP Method : `POST`
--   Request Headers :
-    -   Accept : `application/json`
--   Request Body :
-
-```json
-{
-    "username": "jerryandriantop@gmail.com",
-    "password": "secret123"
-}
-```
-
--   Request Header :
-    -   Accept : `application/json`
--   Response Body (Success) :
-
-```json
-{
-    "status": "OK",
-    "message": "User logged in successfully",
-    "data": {
-        "id": "user-Ps9qXx12",
-        "username": "jerryandriantop@gmail.com",
-        "fullName": "Jerry Andrianto Pangaribuan",
-        "gender": "Male",
-        "date_of_birth": "2000-04-22",
-        "height": 173,
-        "weight": 60,
-        "age": 22,
-        "token": "asdakdjhauwdkhKDHQOIdlasdjlnvkznxkcndowidajhfjhufiqdopjpD;aksdaosjdpwuejpoqjfnoialskdjncvijlandklasdna"
-    }
-}
-```
-
--   Response Body (Fail) :
-
-```json
-{
-    "status": "Not Found",
-    "message": "User not found"
-}
-```
-
-```json
-{
-    "status": "Unauthorized",
-    "message": "Wrong password"
-}
-```
-
-```json
-{
-    "status": "error",
-    "message": "Token is missing!"
-}
-```
-
-```json
-{
-    "status": "error",
-    "message": "Token is invalid!"
-}
-```
-
-```json
-{
-    "status": "error",
-    "message": "Server fail"
 }
 ```
